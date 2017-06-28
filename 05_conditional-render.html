@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+   	<script type="text/babel">
+   	    function UserGreeting (props) {
+          return <h1>Welcome Back!</h1>;
+        }
+        function GuestGreeting (props) {
+          return <h1>Please Sign Up </h1>;
+        }
+
+       /* function Greeting (props) {
+          const isLoggedIn = props.isLoggedIn;
+          if (isLoggedIn) {
+            return <UserGreeting />;
+          }
+          return <GuestGreeting />
+        }*/
+        class Greeting extends React.Component {
+          constructor (props) {
+            super(props);
+            this.state = {
+              isLoggedIn:false
+            }
+            this.toggleState = this.toggleState.bind(this);
+          }
+          toggleState () {
+            this.setState(prevState => ({
+              isLoggedIn:!prevState.isLoggedIn
+            }))
+          }
+          render () {
+            let res = null;
+              if (this.state.isLoggedIn) {
+                res = <UserGreeting />;
+              }else {
+                res = <GuestGreeting />;
+              }
+            return (
+                <div>
+                  <button onClick={this.toggleState}>Toggle</button>    
+                  {res}
+                </div>
+              )
+          }
+        }
+        ReactDOM.render(
+          <Greeting isLoggedIn={false} />,
+          document.getElementById('root')
+        )
+   	</script>
+  </body>
+</html>

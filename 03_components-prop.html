@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+     /*function Tick () {
+        const element = ( 
+         <div>
+           <h1>hello tick </h1>
+           <p>
+             it is {new Date().toLocaleTimeString()}
+           </p>
+         </div>
+         );
+        return element;
+      }*/
+      class Tick extends React.Component {
+        render() {
+          return (
+            <div>
+               <h1>hello tick </h1>
+               <p>
+                 it is {new Date().toLocaleTimeString()} of {this.props.name}
+               </p>
+             </div>
+            )
+        }
+      }
+      function App (props) {
+        return (
+          <div>
+            <Tick name="lisi"/>
+            <Tick name="wangwu"/>
+            <Tick name="zhaoliu"/>
+            <h1>{props.haha}!</h1>
+          </div>
+        )
+      }
+       ReactDOM.render(
+          <App haha="oh"/>,
+          document.getElementById('root')
+        ) 
+ 
+
+    </script>
+  </body>
+</html>

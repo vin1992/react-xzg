@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="root_1"></div>
+    <script type="text/babel">
+   		function Comment(props) {
+		  return (
+		    <div className="Comment">
+		      <UserInfo author={data.author} />
+		      <div className="Comment-text">
+		        {props.text}
+		      </div>
+		      <div className="Comment-date">
+		        {props.date}
+		      </div>
+
+		    </div>
+		  );
+		}
+		function UserInfo (props) {
+			return (
+				<div className="UserInfo">
+					<img className="Avatar"
+			          src={props.author.avatarUrl}
+			          alt={props.author.name}
+			        />
+			        <div className="UserInfo-name">
+			          {props.author.name}
+			        </div>
+				</div>
+			)
+		}
+		const data = {
+			author:{
+				avatarUrl:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1497784419367&di=3cfb18ff8b3ef0c89426abffcc8436d4&imgtype=0&src=http%3A%2F%2Fimage.tianjimedia.com%2FuploadImages%2F2015%2F204%2F22%2FYMG9CAUWUM15.jpg",
+				name:"baby",
+			},
+			text:"goood girl",
+			date:"2012-12-12",
+		};
+		function Unpure (props) {
+			console.log(props.num);
+			console.log(props.num);
+			
+		}
+		ReactDOM.render(
+			<Comment author={data.author} text={data.text} date={data.date} />,
+			document.getElementById('root')
+		);
+
+		class Clock extends React.Component {
+			constructor (props) {
+				super(props);
+				this.state = {date:new Date()};
+			}
+			componentDidMount() {
+				this.timerID = setInterval(
+				() => {
+						this.tick();
+					}
+				,1000);
+			}
+			componentWillUnmount() {
+				clearInterval(this.timerID);
+			}
+			tick () {
+				this.setState({
+					date:new Date(),
+				})
+			}
+			render () {
+				return <h1>{this.state.date.toLocaleTimeString()}</h1>
+			}
+		}
+		function App () {
+			return (
+				<div>
+					<Clock />
+					<Clock />
+					<Clock />
+				</div>
+			)
+		}
+		ReactDOM.render(
+			<App />,
+			document.getElementById('root_1')
+		)
+			
+		
+    </script>
+  </body>
+</html>

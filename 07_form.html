@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+		class NameForm extends React.Component {
+			constructor (props) {
+				super(props);
+				this.state = {
+					text_value:'',
+					select_value:'请选择',
+				}
+				this.handleChange = this.handleChange.bind(this);
+				this.handleSubmit = this.handleSubmit.bind(this);
+			}
+			handleChange (ev) {
+				const name = ev.target.name;
+				console.log(name,ev.target.value,[name]);
+				this.setState({
+					[name]:ev.target.value,
+				})
+			}
+			handleSubmit (ev) {
+				alert('A Name will be submitted'+ this.state.value );
+				ev.preventDefault();
+			}
+			render () {
+				return (
+					<form onSubmit={this.handleSubmit}>
+						<p>
+							<textarea name="content" type="text" value={this.state.text_value} onChange={this.handleChange}></textarea>
+						</p>
+						<p>
+							<input type="submit" value="提交" /> 
+						</p>
+						<h1>
+							{this.state.text_value}
+						</h1>
+						<p>
+							<select name="choice"  value={this.state.select_value} onChange={this.handleChange}>
+								<option value="">请选择</option>
+								<option value="能量">能量</option>
+								<option value="血量">血量</option>
+								<option value="速度">速度</option>
+								<option value="力量">力量</option>
+								<option value="">空值</option>
+							</select>
+						</p>
+						<p>
+							你选择了{this.state.select_value}
+						</p>
+					</form>
+
+				)
+			}
+		}
+		ReactDOM.render(
+			<NameForm />,
+			document.getElementById('root')
+		)
+	</script>
+</body>
+</html>
